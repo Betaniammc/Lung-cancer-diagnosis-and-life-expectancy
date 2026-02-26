@@ -17,12 +17,16 @@ para los distintos hitos de tiempo (12 a 60 meses). Se utilizó un set de prueba
 # Basado en tu output del notebook donde Accuracy era 0.79 y F1-Score clase 1 era 0.83
 data_performance = {
     "Horizonte": ["12 Meses", "24 Meses", "36 Meses", "48 Meses", "60 Meses"],
-    "Accuracy": [0.85, 0.82, 0.79, 0.76, 0.74],  # Ejemplo: suele bajar con el tiempo
-    "AUC-ROC": [0.91, 0.88, 0.85, 0.82, 0.80],
-    "F1-Score (Vivos)": [0.88, 0.85, 0.83, 0.80, 0.78],
-    "Precision (Vivos)": [0.86, 0.84, 0.82, 0.79, 0.77],
-    "Recall (Vivos)": [0.90, 0.87, 0.83, 0.81, 0.79]
+    "Accuracy": [0.79, 0.81, 0.83, 0.85, 0.88], 
+    "AUC-ROC": [0.87, 0.88, 0.89, 0.89, 0.91],
+    "F1-Score (Vivos)": [0.83, 0.78, 0.74, 0.71, 0.68],
+    "Precision (Vivos)": [0.82, 0.82, 0.79, 0.76, 0.75],
+    "Recall (Vivos)": [0.83, 0.74, 0.70, 0.66, 0.62],
+    "F1-Score (No sobreviven)": [0.75, 0.84, 0.88, 0.90, 0.93],
+    "Precision (No sobreviven)": [0.75, 0.81, 0.85, 0.88, 0.91],
+    "Recall (No sobreviven)": [0.74, 0.87, 0.90, 0.92, 0.95]
 }
+
 
 df_perf = pd.DataFrame(data_performance)
 
@@ -58,12 +62,12 @@ with col1:
     st.plotly_chart(fig_line, use_container_width=True)
 
 with col2:
-    st.subheader("Matriz de Confusión (Ejemplo 36 Meses)")
+    st.subheader("Matriz de Confusión (Ejemplo 60 Meses)")
     # Recreamos visualmente la matriz que generaste en seaborn pero con estilo Streamlit
     # Datos ejemplo del notebook: TP=Alta, TN=Alta, FP/FN=Bajos
     conf_matrix_data = [
-        [2200, 450],  # Viven: Predicción Correcta, Error
-        [600, 1800]  # Mueren: Error, Predicción Correcta
+        [6236, 3764],  # Viven: Predicción Correcta, Error
+        [2105, 36687]  # Mueren: Error, Predicción Correcta
     ]
 
     fig_hm = go.Figure(data=go.Heatmap(
